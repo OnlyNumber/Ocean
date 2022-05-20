@@ -10,7 +10,7 @@ class Cell
 
 public: 
 	Cell();
-	Cell(Ocean* owner, Coordinate offset) : _owner(*owner), anOffset(offset) 
+	Cell(Ocean& owner, Coordinate offset) : _owner(owner), anOffset(offset) 
 	{
 		setImage(DEFAULT_IMAGE);
 	};
@@ -54,10 +54,12 @@ public:
 	Cell* getWest();
 	Cell* getEast();
 	
+protected:
+	Ocean& _owner;
+
 private:
 	bool isTurnDoneCheck = false;
 	Coordinate anOffset;
-	Ocean& _owner;
 	char image = DEFAULT_IMAGE;
 	
 };

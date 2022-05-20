@@ -35,7 +35,7 @@ void Ocean::run()
 	{
 		for (int y = 0; y < DEFAULT_COLUMNS; y++)
 		{
-			_cells[x][y] = new Cell(this,Coordinate(x,y));    // TODO: изменить на пустой указатель, Cell дол жен стать абстрактным
+			_cells[x][y] = new Cell(*this, Coordinate(x,y));    // TODO: изменить на пустой указатель, Cell дол жен стать абстрактным
 		}
 	}
 
@@ -101,7 +101,7 @@ void Ocean::createObstacles()
 	{
 		empty = getEmptyCellCoord();
 		std::cout << "\n" << empty.GetX() << " " << empty.GetY() << " ";
-		_cells[empty.GetX()][empty.GetY()] = new Obstacle(this, empty);
+		_cells[empty.GetX()][empty.GetY()] = new Obstacle(*this, empty);
 	}
 	return;
 }
@@ -110,7 +110,7 @@ void Ocean::createPrey()
 {
 	Coordinate empty;
 	empty = getEmptyCellCoord();
-	_cells[empty.GetX()][empty.GetY()] = new Prey(this, empty);
+	_cells[empty.GetX()][empty.GetY()] = new Prey(*this, empty);
 	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
 }
 void deleteCell(Coordinate aCoord)

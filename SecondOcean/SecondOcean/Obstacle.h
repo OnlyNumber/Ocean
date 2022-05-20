@@ -6,12 +6,13 @@ class Obstacle : public Cell
 {
 
 public:
-	Obstacle(Ocean* owner, Coordinate offset) :Cell(owner, offset)
+	Obstacle(Ocean& owner, Coordinate offset) : Cell(owner, offset)
 	{
-		setOwner(owner);
+		//setOwner(owner);
 		setOffset(offset);
 		setImage(OBSTACLE_IMAGE);
 	};
+
 	virtual ~Obstacle() {};
 	//todo: доделать припятствие
 private:

@@ -17,8 +17,9 @@ void Prey::MoveFrom(Coordinate from, Coordinate to)
 }
 void Prey::Reproduce(Coordinate anOffset)
 	{
-	 assignCellAt(anOffset, new Prey(returnUkazatel(), anOffset));
-	 getOwner().getCell(anOffset.GetX(),anOffset.GetY())->selfDestroy();
+	 getOwner().getCell(anOffset.GetX(), anOffset.GetY())->selfDestroy();
+	 assignCellAt(anOffset, new Prey(_owner, anOffset));
+	 
 
 	}
  void Prey::process()

@@ -1,2 +1,8 @@
-﻿  Prey.cpp
-  SecondOcean.vcxproj -> C:\Users\User\Desktop\SecondOcean\Debug\SecondOcean.exe
+﻿  Cell.cpp
+  Obstacle.cpp
+  Ocean.cpp
+  Predator.cpp
+  Prey.cpp
+  SecondOcean.cpp
+  Создание кода...
+  SecondOcean.vcxproj -> C:\Users\User\Desktop\GitPractic\SecondOcean\Debug\SecondOcean.exe

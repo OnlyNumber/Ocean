@@ -7,9 +7,9 @@ class Prey : public Cell
 {
 public:
 	//todo:доделать жертву
-	Prey(Ocean* owner, Coordinate offset) : Cell(owner, offset)
+	Prey(Ocean& owner, Coordinate offset) : Cell(owner, offset)
 	{
-		setOwner(owner);
+		//setOwner(owner);
 		setOffset(offset);
 		setImage(PREY_IMAGE);
 		timeToReproduce = DEFAULT_TIME_TO_REPRODUCE;
