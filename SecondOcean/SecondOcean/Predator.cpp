@@ -7,22 +7,14 @@ class Ocean;
 void Predator::MoveFrom(Coordinate from, Coordinate to)
 {
 
-	Cell* toCell;
-	toCell = getOwner().getCell(to.GetX(), to.GetY());
+	assignCellAt(from, nullptr);
+
 	assignCellAt(to, this);
 	this->setOffset(to);
-
-	assignCellAt(from, toCell);
-	toCell->setOffset(from);
 }
 
 void Predator::Reproduce(Coordinate anOffset)
-{
-	//getOwner().getCell(anOffset.GetX(), anOffset.GetY())->selfDestroy();
-	/*Cell* toCell;
-	toCell = getOwner().getCell(anOffset.GetX(), anOffset.GetY());
-	delete toCell;*/
-	
+{	
 	assignCellAt(anOffset, new Predator(_owner, anOffset));
 
 
@@ -46,7 +38,7 @@ void Predator::process()
 
 				setTimeToReproduce(DEFAULT_TIME_TO_REPRODUCE);
 			}
-			}
+		}
 
 		
 
@@ -65,12 +57,12 @@ void Predator::process()
 
 void Predator::eatPrey(Coordinate from, Coordinate to)
 {
-	Cell* toCell;
+	/*Cell* toCell;
 	toCell = new Cell(_owner,from);
 	assignCellAt(to, this);
 	this->setOffset(to);
 
 	assignCellAt(from, toCell);
-	toCell->setOffset(from);
+	toCell->setOffset(from);*/
 }
 

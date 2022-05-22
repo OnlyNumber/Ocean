@@ -14,6 +14,11 @@ public:
 	};
 
 	virtual ~Obstacle() {};
+
+	void process()
+	{
+
+	};
 	//todo: доделать припятствие
 private:
 	

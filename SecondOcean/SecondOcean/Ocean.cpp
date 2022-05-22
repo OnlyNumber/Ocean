@@ -36,15 +36,15 @@ void Ocean::run()
 	{
 		for (int y = 0; y < DEFAULT_COLUMNS; y++)
 		{
-			_cells[x][y] = new Cell(*this, Coordinate(x,y));    // TODO: изменить на пустой указатель, Cell дол жен стать абстрактным
+			_cells[x][y] = nullptr;    // TODO: изменить на пустой указатель, Cell должен стать абстрактным
 		}
 	}
 
-	//createObstacles();
+	createObstacles();
 	
 	createPrey();
 
-	//createPredator();
+	createPredator();
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -54,21 +54,34 @@ void Ocean::run()
 			std::cout << "\n";
 			for (int y = 0; y < DEFAULT_COLUMNS; y++)
 			{
-				std::cout << _cells[x][y]->getImage();
+				if (_cells[x][y] == nullptr)
+				{
+					std::cout <<DEFAULT_IMAGE;
+				}
+				else
+				{
+					std::cout << _cells[x][y]->getImage();
+				}
 			}
 		}
 		for (int x = 0; x < DEFAULT_ROWS; x++)
 		{
 			for (int y = 0; y < DEFAULT_COLUMNS; y++)
 			{
-				_cells[x][y]->process();
+				if (_cells[x][y] != nullptr)
+				{
+					_cells[x][y]->process();
+				}
 			}
 		}
 		for (int x = 0; x < DEFAULT_ROWS; x++)
 		{
 			for (int y = 0; y < DEFAULT_COLUMNS; y++)
 			{
-				_cells[x][y]->setTurnDoneCheck(true);
+				if (_cells[x][y] != nullptr)
+				{
+					_cells[x][y]->setTurnDoneCheck(true);
+				}
 			}
 		}
 
@@ -78,20 +91,14 @@ void Ocean::run()
 
 Coordinate Ocean::getEmptyCellCoord()
 {
-	Coordinate empty;
 	int x, y;
 	
 	do{
 	x = random.nextIntBetween(0, DEFAULT_ROWS - 1);
 	y = random.nextIntBetween(0, DEFAULT_COLUMNS - 1);
-	//std::cout <<"\n"<< x << " " << y <<" ";
-	} while (_cells[x][y]->getImage() != DEFAULT_IMAGE);
+	} while (_cells[x][y] != nullptr);
 
-
-	empty = _cells[x][y]->getOffset();
-	//std::cout << "\n" << empty.GetX() << " " << empty.GetY() << " ";
-	delete _cells[x][y];
-
+	Coordinate empty(x,y);
 
 	return empty;
 
@@ -112,7 +119,9 @@ void Ocean::createObstacles()
 void Ocean::createPrey()
 {
 	Coordinate empty;
+	std::cout << "tut";
 	empty = getEmptyCellCoord();
+	std::cout << "tut2";
 	_cells[empty.GetX()][empty.GetY()] = new Prey(*this, empty);
 	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
 }

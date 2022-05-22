@@ -7,31 +7,32 @@ class Ocean;
 Coordinate Cell::getNeighborCordWithAnImage(char anImage)
 {
 	int count = 0;
-	Cell* neighbors[4];
+	Coordinate neighbors[4];
 
-	if (anImage == getNorth()->getImage())
+	if (anImage == getOffsetChar(getNorth()))
 	{
 		neighbors[count++] = getNorth();
 	}
 
-	if (anImage == getSouth()->getImage())
+	if (anImage == getOffsetChar(getSouth()))
 	{
 		neighbors[count++] = getSouth();
 	}
 
-	if (anImage == getEast()->getImage())
+	if (anImage == getOffsetChar(getEast()))
 	{
 		neighbors[count++] = getEast();
 	}
 
-	if (anImage == getWest()->getImage())
+	if (anImage == getOffsetChar(getWest()))
 	{
 		neighbors[count++] = getWest();
 	}
 
 	if (count >= 1)
 	{
-		return neighbors[/*getOwner().GetRandom().nextIntBetween(0, count - 1)*/ rand() % count]->getOffset();
+		std::cout << count;
+		return neighbors[ rand() % count];
 	}
 	else
 	{
@@ -39,54 +40,129 @@ Coordinate Cell::getNeighborCordWithAnImage(char anImage)
 	}
 
 }
-//TODO: Идиот вы допустили ошибку в координатах, это будет стоить вам в 510 лет
-Cell* Cell::getNorth()
+
+char Cell::getOffsetChar(Coordinate aCoord)
+	{
+		
+		if (_owner.getCell(aCoord.GetX(), aCoord.GetY()) == nullptr)
+		{
+			return DEFAULT_IMAGE;
+		}
+		else
+		{
+
+			return _owner.getCell(aCoord.GetX(), aCoord.GetY())->getImage();
+		}
+	}
+
+
+Coordinate Cell::getNorth()
 {
+	Coordinate empty(1, 1);
+
 	if ((anOffset.GetX() - 1) < 0)
 	{
-		//std::cout << anOffset.GetX();
-		return _owner.getCell(anOffset.GetX(), anOffset.GetY());
+		if (_owner.getCell(anOffset.GetX(), anOffset.GetY()) == nullptr)
+		{
+			return Coordinate(anOffset.GetX(), anOffset.GetY());
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX(), anOffset.GetY())->getOffset();
+		}
+
+		//return _owner.getCell(anOffset.GetX(), anOffset.GetY());
 	}
 	else
 	{
-		return _owner.getCell(anOffset.GetX() - 1, anOffset.GetY() );
+		if (_owner.getCell(anOffset.GetX() - 1, anOffset.GetY()) == nullptr)
+		{
+			return Coordinate(anOffset.GetX() - 1, anOffset.GetY());
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX() - 1, anOffset.GetY())->getOffset();
+		}
+		//return _owner.getCell(anOffset.GetX() - 1, anOffset.GetY() );
 	}
 
 }
-Cell* Cell::getSouth()
+Coordinate Cell::getSouth()
 {
 	if ((anOffset.GetX() + 1) == DEFAULT_ROWS)
 	{
-		return _owner.getCell(anOffset.GetX(), anOffset.GetY());
+		if (_owner.getCell(anOffset.GetX(), anOffset.GetY()) == nullptr)
+		{
+			return Coordinate(anOffset.GetX(), anOffset.GetY());
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX(), anOffset.GetY())->getOffset();
+		}
 	}
 	else
 	{
-		return _owner.getCell(anOffset.GetX() + 1, anOffset.GetY());
+		if (_owner.getCell(anOffset.GetX() + 1, anOffset.GetY()) == nullptr)
+		{
+			return Coordinate(anOffset.GetX() + 1, anOffset.GetY());
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX() + 1, anOffset.GetY())->getOffset();
+		}
 	}
 
 }
 
-Cell* Cell::getWest()
+Coordinate Cell::getWest()
 {
 	if ((anOffset.GetY() - 1) < 0)
 	{
-		return _owner.getCell(anOffset.GetX(), anOffset.GetY());
+		if (_owner.getCell(anOffset.GetX(), anOffset.GetY()) == nullptr)
+		{
+			return Coordinate(anOffset.GetX(), anOffset.GetY());
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX(), anOffset.GetY())->getOffset();
+		}
 	}
 	else
 	{
-		return _owner.getCell(anOffset.GetX(), anOffset.GetY() - 1);
+		if (_owner.getCell(anOffset.GetX(), anOffset.GetY() - 1) == nullptr)
+		{
+			return Coordinate(anOffset.GetX(), anOffset.GetY() - 1);
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX(), anOffset.GetY() - 1)->getOffset();
+		}
 	}
 
 }
-Cell* Cell::getEast()
+Coordinate Cell::getEast()
 {
 	if ((anOffset.GetY() + 1) == DEFAULT_COLUMNS)
 	{
-		return _owner.getCell(anOffset.GetX(), anOffset.GetY());
+		if (_owner.getCell(anOffset.GetX(), anOffset.GetY()) == nullptr)
+		{
+			return Coordinate(anOffset.GetX(), anOffset.GetY());
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX(), anOffset.GetY())->getOffset();
+		}
 	}
 	else
 	{
-		return _owner.getCell(anOffset.GetX(), anOffset.GetY() + 1);
+		if (_owner.getCell(anOffset.GetX(), anOffset.GetY() + 1) == nullptr)
+		{
+			return Coordinate(anOffset.GetX(), anOffset.GetY() + 1);
+		}
+		else
+		{
+			return _owner.getCell(anOffset.GetX(), anOffset.GetY() + 1)->getOffset();
+		}
 	}
 }
 
@@ -154,3 +230,4 @@ void Cell::deleteThisCell(Coordinate aCoord)
 {
 	_owner.destroyCell(aCoord);
 }
+

@@ -3,6 +3,7 @@
 #include "Coordinate.h"
 #include "Random.h"
 
+
 class Ocean;
 
 class Cell
@@ -20,7 +21,7 @@ public:
 
 	virtual ~Cell() {};
 	//todo: сделать проверку на то, была ли у клетка задействована 
-	virtual void process() {};
+	virtual void process() = 0;
 
 	void setImage(char needImage);
 	char getImage();
@@ -50,11 +51,13 @@ public:
 	void assignCellAt(Coordinate aCoord, Cell* aCell);
 	void deleteThisCell(Coordinate);
 	
-	Cell* getNorth();
-	Cell* getSouth();
-	Cell* getWest();
-	Cell* getEast();
+	Coordinate getNorth();
+	Coordinate getSouth();
+	Coordinate getWest();
+	Coordinate getEast();
 	
+	char getOffsetChar(Coordinate);
+
 protected:
 	Ocean& _owner;
 

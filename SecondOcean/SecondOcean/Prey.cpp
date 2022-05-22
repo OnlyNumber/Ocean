@@ -6,14 +6,11 @@ class Ocean;
 
 void Prey::MoveFrom(Coordinate from, Coordinate to)
 {
-	
-	Cell* toCell;
-	toCell = getOwner().getCell(to.GetX(), to.GetY());
+
+	assignCellAt(from, nullptr);
+
 	assignCellAt(to, this);
 	this->setOffset(to);
-
-	assignCellAt(from, toCell);
-	toCell->setOffset(from);
 }
 void Prey::Reproduce(Coordinate anOffset)
 	{
@@ -21,7 +18,7 @@ void Prey::Reproduce(Coordinate anOffset)
 	//toCell = _owner.getCell(anOffset.GetX(), anOffset.GetY());
 	//delete toCell;
 	
-	deleteThisCell(anOffset);
+	//deleteThisCell(anOffset);
 
 	assignCellAt(anOffset, new Prey(_owner, anOffset));
 	 
@@ -32,7 +29,6 @@ void Prey::Reproduce(Coordinate anOffset)
 
 	 if (getTurnDoneCheck() == true)
 	 {
-		 
 		 MoveFrom(getOffset(), getEmptyNeighborCoord());
 		 
 		 if (--timeToReproduce == 0)
