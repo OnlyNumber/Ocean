@@ -17,6 +17,30 @@ public:
 
 	};
 
+	bool operator != (Coordinate anOffset)
+	{
+		x == anOffset.x;
+		y == anOffset.y;
+		if (x != anOffset.x || y != anOffset.y)
+		{
+			return true;
+	    }
+	}
+
+	bool operator == (Coordinate anOffset)
+	{
+		x == anOffset.x;
+		y == anOffset.y;
+		if (x == anOffset.x && y == anOffset.y)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	int GetX()
 	{
 		return x;

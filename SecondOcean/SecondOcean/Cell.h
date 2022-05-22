@@ -35,7 +35,7 @@ public:
 
 	void selfDestroy()
 	{
-		delete(this);
+		delete this;
 	};
 
 	Ocean* returnUkazatel()
@@ -48,6 +48,7 @@ public:
 	Coordinate getPreyNeighborCoord();
 	Cell* getCellAt(Coordinate aCoord);
 	void assignCellAt(Coordinate aCoord, Cell* aCell);
+	void deleteThisCell(Coordinate);
 	
 	Cell* getNorth();
 	Cell* getSouth();

@@ -149,3 +149,8 @@ void Cell::setTurnDoneCheck(bool turn)
 {
 	isTurnDoneCheck = turn;
 }
+
+void Cell::deleteThisCell(Coordinate aCoord)
+{
+	_owner.destroyCell(aCoord);
+}

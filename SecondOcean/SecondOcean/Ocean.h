@@ -20,6 +20,8 @@ public:
 	Coordinate getEmptyCellCoord();
 	void createObstacles();
 	void createPrey();
+	void createPredator();
+	void destroyCell(Coordinate );
 	void run();
 	//Random random;
 private:

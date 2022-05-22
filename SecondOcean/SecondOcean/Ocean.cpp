@@ -1,6 +1,7 @@
 #include "Ocean.h"
 #include "Cell.h"
 #include "Prey.h"
+#include "Predator.h"
 #include "Obstacle.h"
 #include "Constants.h"
 
@@ -39,13 +40,15 @@ void Ocean::run()
 		}
 	}
 
-	createObstacles();
+	//createObstacles();
 	
 	createPrey();
 
+	//createPredator();
+
 	for (int i = 0; i < 100; i++)
 	{
-		std::cout << "\n";
+		std::cout << "\n Int i" << i;
 		for (int x = 0; x < DEFAULT_ROWS; x++)
 		{
 			std::cout << "\n";
@@ -113,12 +116,20 @@ void Ocean::createPrey()
 	_cells[empty.GetX()][empty.GetY()] = new Prey(*this, empty);
 	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
 }
-void deleteCell(Coordinate aCoord)
-{
-	//delete _cells[aCoord.GetX()][aCoord.GetY()];
-	//return;
-}
 
+void Ocean::createPredator()
+{
+	Coordinate empty;
+	empty = getEmptyCellCoord();
+	_cells[empty.GetX()][empty.GetY()] = new Predator(*this, empty);
+	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
+}
+void Ocean::destroyCell(Coordinate empty)
+{
+	
+	//std::cout << "\n" << empty.GetX() << " " << empty.GetY() << " ";
+	delete _cells[empty.GetX()][empty.GetY()];
+}
 
 
 
