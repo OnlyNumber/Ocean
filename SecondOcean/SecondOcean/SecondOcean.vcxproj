@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="CellsVisitors.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="Obstacle.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="CellsVisitors.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="Obstacle.h" />

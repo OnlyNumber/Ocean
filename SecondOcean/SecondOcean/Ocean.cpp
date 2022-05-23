@@ -36,7 +36,7 @@ void Ocean::run()
 	{
 		for (int y = 0; y < DEFAULT_COLUMNS; y++)
 		{
-			_cells[x][y] = nullptr;    // TODO: изменить на пустой указатель, Cell должен стать абстрактным
+			_cells[x][y] = nullptr;    
 		}
 	}
 
@@ -46,9 +46,28 @@ void Ocean::run()
 
 	createPredator();
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		std::cout << "\n Int i" << i;
+		_visitor.clear();
+		std::cout << "\n ";// Int i" << i;
+		for (int x = 0; x < DEFAULT_ROWS; x++)
+		{
+			for (int y = 0; y < DEFAULT_COLUMNS; y++)
+			{
+				if (_cells[x][y] != nullptr)
+				{
+					Cell* currnetItem = _cells[x][y];
+
+					if (!_visitor.isVisited(currnetItem))
+					{
+
+					//std::cout << "work";
+						_cells[x][y]->process();
+						_visitor.visit(currnetItem);
+					}
+				}
+			}
+		}
 		for (int x = 0; x < DEFAULT_ROWS; x++)
 		{
 			std::cout << "\n";
@@ -56,7 +75,7 @@ void Ocean::run()
 			{
 				if (_cells[x][y] == nullptr)
 				{
-					std::cout <<DEFAULT_IMAGE;
+					std::cout << DEFAULT_IMAGE;
 				}
 				else
 				{
@@ -64,17 +83,7 @@ void Ocean::run()
 				}
 			}
 		}
-		for (int x = 0; x < DEFAULT_ROWS; x++)
-		{
-			for (int y = 0; y < DEFAULT_COLUMNS; y++)
-			{
-				if (_cells[x][y] != nullptr)
-				{
-					_cells[x][y]->process();
-				}
-			}
-		}
-		for (int x = 0; x < DEFAULT_ROWS; x++)
+		/*for (int x = 0; x < DEFAULT_ROWS; x++)
 		{
 			for (int y = 0; y < DEFAULT_COLUMNS; y++)
 			{
@@ -83,7 +92,7 @@ void Ocean::run()
 					_cells[x][y]->setTurnDoneCheck(true);
 				}
 			}
-		}
+		}*/
 
 	}
 
@@ -119,9 +128,9 @@ void Ocean::createObstacles()
 void Ocean::createPrey()
 {
 	Coordinate empty;
-	std::cout << "tut";
+	//std::cout << "tut";
 	empty = getEmptyCellCoord();
-	std::cout << "tut2";
+	//std::cout << "tut2";
 	_cells[empty.GetX()][empty.GetY()] = new Prey(*this, empty);
 	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
 }
@@ -138,13 +147,8 @@ void Ocean::destroyCell(Coordinate empty)
 	
 	//std::cout << "\n" << empty.GetX() << " " << empty.GetY() << " ";
 	delete _cells[empty.GetX()][empty.GetY()];
+	_cells[empty.GetX()][empty.GetY()] = nullptr;
 }
-
-
-
-
-
-
 
 //todo: узнать о gof
 //gof visitor

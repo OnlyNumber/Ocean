@@ -18,8 +18,7 @@ public:
 	void process()
 	{
 
-	};
-	//todo: доделать припятствие
+	}
 private:
 	
 	

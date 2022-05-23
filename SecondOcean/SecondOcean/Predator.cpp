@@ -21,9 +21,27 @@ void Predator::Reproduce(Coordinate anOffset)
 }
 void Predator::process()
 {
-
-	if (getTurnDoneCheck() == true)
+	//std::cout << timeToFeed;
+	if (--timeToFeed <= 0)
 	{
+		Coordinate prey = getPreyNeighborCoord();
+		
+		if (prey != getOffset())
+		{
+			std::cout << prey.GetX() << " " << prey.GetY()<< " ";
+			eatPrey(getOffset(), getPreyNeighborCoord());
+			timeToFeed = DEFAULT_TIME_TO_FEED;
+			return;
+		}
+		else
+		{
+			assignCellAt(getOffset(), nullptr);
+			_owner.destroyCell(getOffset());
+			return;
+		}
+
+	}
+
 
 		MoveFrom(getOffset(), getEmptyNeighborCoord());
 		
@@ -40,23 +58,16 @@ void Predator::process()
 			}
 		}
 
-		
-
-		if (--timeToFeed  <=5)
-		{
-			//assignCellAt(getOffset(), new Cell(_owner, getOffset()));
-			//delete this;
-		}
-		else
-		{
-			eatPrey(getOffset(),getPreyNeighborCoord());
-		}
-	}
-	setTurnDoneCheck(false);
 }
 
 void Predator::eatPrey(Coordinate from, Coordinate to)
 {
+	_owner.destroyCell(to);
+	assignCellAt(from, nullptr);
+
+	assignCellAt(to, this);
+	this->setOffset(to);
+
 	/*Cell* toCell;
 	toCell = new Cell(_owner,from);
 	assignCellAt(to, this);

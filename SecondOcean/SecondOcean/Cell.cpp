@@ -31,7 +31,7 @@ Coordinate Cell::getNeighborCordWithAnImage(char anImage)
 
 	if (count >= 1)
 	{
-		std::cout << count;
+		//std::cout << count;
 		return neighbors[ rand() % count];
 	}
 	else

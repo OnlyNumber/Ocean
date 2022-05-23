@@ -1,5 +1,10 @@
 #pragma once
-class OceanDisplay
+
+#include "Ocean.h"
+
+class OceanDisplay : public Ocean
 {
+
+
 };
 

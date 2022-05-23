@@ -19,26 +19,16 @@ public:
 
 	bool operator != (Coordinate anOffset)
 	{
-		x == anOffset.x;
-		y == anOffset.y;
-		if (x != anOffset.x || y != anOffset.y)
-		{
-			return true;
-	    }
+
+		return (x != anOffset.x || y != anOffset.y);
+
 	}
 
 	bool operator == (Coordinate anOffset)
 	{
-		x == anOffset.x;
-		y == anOffset.y;
-		if (x == anOffset.x && y == anOffset.y)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+
+		return (x == anOffset.x && y == anOffset.y);
+
 	}
 
 	int GetX()

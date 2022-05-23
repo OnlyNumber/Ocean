@@ -20,7 +20,6 @@ public:
 	
 
 	virtual ~Cell() {};
-	//todo: сделать проверку на то, была ли у клетка задействована 
 	virtual void process() = 0;
 
 	void setImage(char needImage);
@@ -33,16 +32,6 @@ public:
 	void setOffset(Coordinate& aCoord);
 	Ocean getOwner();
 	void setOwner(Ocean* owner);
-
-	void selfDestroy()
-	{
-		delete this;
-	};
-
-	Ocean* returnUkazatel()
-	{
-		return &_owner;
-	}
 
 	Coordinate getNeighborCordWithAnImage(char anImage);
 	Coordinate getEmptyNeighborCoord();

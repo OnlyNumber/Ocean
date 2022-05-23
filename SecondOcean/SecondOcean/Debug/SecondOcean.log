@@ -1,7 +1,2 @@
 ﻿  Predator.cpp
-C:\Users\User\Desktop\GitPractic\SecondOcean\SecondOcean\Coordinate.h(22,5): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\User\Desktop\GitPractic\SecondOcean\SecondOcean\Coordinate.h(23,5): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\User\Desktop\GitPractic\SecondOcean\SecondOcean\Coordinate.h(32,5): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\User\Desktop\GitPractic\SecondOcean\SecondOcean\Coordinate.h(33,5): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
-C:\Users\User\Desktop\GitPractic\SecondOcean\SecondOcean\Coordinate.h(28): warning C4715: Coordinate::operator!=: значение возвращается не при всех путях выполнения
   SecondOcean.vcxproj -> C:\Users\User\Desktop\GitPractic\SecondOcean\Debug\SecondOcean.exe

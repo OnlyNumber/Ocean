@@ -14,11 +14,6 @@ void Prey::MoveFrom(Coordinate from, Coordinate to)
 }
 void Prey::Reproduce(Coordinate anOffset)
 	{
-	//Cell* toCell;
-	//toCell = _owner.getCell(anOffset.GetX(), anOffset.GetY());
-	//delete toCell;
-	
-	//deleteThisCell(anOffset);
 
 	assignCellAt(anOffset, new Prey(_owner, anOffset));
 	 
@@ -27,8 +22,8 @@ void Prey::Reproduce(Coordinate anOffset)
  void Prey::process()
 {
 
-	 if (getTurnDoneCheck() == true)
-	 {
+	 //if (getTurnDoneCheck() == true)
+	// {
 		 MoveFrom(getOffset(), getEmptyNeighborCoord());
 		 
 		 if (--timeToReproduce == 0)
@@ -38,8 +33,8 @@ void Prey::Reproduce(Coordinate anOffset)
 
 			 timeToReproduce = DEFAULT_TIME_TO_REPRODUCE;
 		 }
-	 }
-	setTurnDoneCheck(false);
+	 //}
+	//setTurnDoneCheck(false);
  }
 
  void Prey::setTimeToReproduce(int ttr)
