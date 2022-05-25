@@ -2,12 +2,20 @@
 //
 #include <iostream>
 #include "Ocean.h"
+#include "OceanDisplay.h"
 
 int main()
 {
-    Ocean ocean2;
+    OceanDisplay display;
+    display.initializeOcean();
+    Ocean ocean2(display.getRows(), display.getColumns(), display.getObstacles(), display.getPredators(), display.getPreys());
 
-    ocean2.run();
+    display.displayOcean(ocean2, 0);
+    for (int i = 0; i < display.getIterations(); i++)
+    {
+        ocean2.run();
+        display.displayOcean(ocean2, i);
+    }
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

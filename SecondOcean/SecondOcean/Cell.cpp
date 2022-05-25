@@ -89,7 +89,7 @@ Coordinate Cell::getNorth()
 }
 Coordinate Cell::getSouth()
 {
-	if ((anOffset.GetX() + 1) == DEFAULT_ROWS)
+	if ((anOffset.GetX() + 1) == _owner.getRows())
 	{
 		if (_owner.getCell(anOffset.GetX(), anOffset.GetY()) == nullptr)
 		{
@@ -142,7 +142,8 @@ Coordinate Cell::getWest()
 }
 Coordinate Cell::getEast()
 {
-	if ((anOffset.GetY() + 1) == DEFAULT_COLUMNS)
+
+	if ((anOffset.GetY() + 1) == _owner.getColumns())
 	{
 		if (_owner.getCell(anOffset.GetX(), anOffset.GetY()) == nullptr)
 		{
@@ -213,7 +214,7 @@ Ocean Cell::getOwner()
 
 void Cell::setOwner(Ocean* owner)
 {
-	_owner = *owner;
+	//_owner = *owner;
 	return;
 }
 

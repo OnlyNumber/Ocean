@@ -14,16 +14,13 @@ void Prey::MoveFrom(Coordinate from, Coordinate to)
 }
 void Prey::Reproduce(Coordinate anOffset)
 	{
-
+	_owner.setPreys(_owner.getPreys() + 1);
 	assignCellAt(anOffset, new Prey(_owner, anOffset));
 	 
 
 	}
  void Prey::process()
 {
-
-	 //if (getTurnDoneCheck() == true)
-	// {
 		 MoveFrom(getOffset(), getEmptyNeighborCoord());
 		 
 		 if (--timeToReproduce == 0)
@@ -33,8 +30,6 @@ void Prey::Reproduce(Coordinate anOffset)
 
 			 timeToReproduce = DEFAULT_TIME_TO_REPRODUCE;
 		 }
-	 //}
-	//setTurnDoneCheck(false);
  }
 
  void Prey::setTimeToReproduce(int ttr)

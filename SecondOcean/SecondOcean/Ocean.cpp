@@ -5,6 +5,42 @@
 #include "Obstacle.h"
 #include "Constants.h"
 
+Ocean::Ocean(int rows, int columns, int obstacles, int predators, int preys) :
+
+	_rows(rows),
+	_columns(columns),
+	_obstacles(obstacles),
+	_predators(predators),
+	_preys(preys),
+	_visitor(rows* columns)
+{
+	_cells = new Cell **[_rows];
+
+	for (int x = 0; x < _rows; x++)
+	{
+		_cells[x] = new Cell *[_columns];
+
+	}
+
+	for (int x = 0; x < _rows; x++)
+	{
+		for (int y = 0; y < _columns; y++)
+		{
+			_cells[x][y] = nullptr;
+		}
+
+	}
+
+	random.intialize();
+
+	createObstacles();
+
+	createPrey();
+
+	createPredator();
+}
+
+
 Random Ocean::GetRandom()
 {
 	return random;
@@ -26,33 +62,17 @@ int Ocean::getRows()
 }
 int Ocean::getColumns()
 {
-	return _rows;
+	return _columns;
 }
 
 void Ocean::run()
 {
-	random.intialize();
-	for (int x = 0; x < DEFAULT_ROWS; x++)
-	{
-		for (int y = 0; y < DEFAULT_COLUMNS; y++)
-		{
-			_cells[x][y] = nullptr;    
-		}
-	}
-
-	createObstacles();
 	
-	createPrey();
 
-	createPredator();
-
-	for (int i = 0; i < 10; i++)
-	{
 		_visitor.clear();
-		std::cout << "\n ";// Int i" << i;
-		for (int x = 0; x < DEFAULT_ROWS; x++)
+		for (int x = 0; x < _rows; x++)
 		{
-			for (int y = 0; y < DEFAULT_COLUMNS; y++)
+			for (int y = 0; y < _columns; y++)
 			{
 				if (_cells[x][y] != nullptr)
 				{
@@ -60,42 +80,12 @@ void Ocean::run()
 
 					if (!_visitor.isVisited(currnetItem))
 					{
-
-					//std::cout << "work";
 						_cells[x][y]->process();
 						_visitor.visit(currnetItem);
 					}
 				}
 			}
 		}
-		for (int x = 0; x < DEFAULT_ROWS; x++)
-		{
-			std::cout << "\n";
-			for (int y = 0; y < DEFAULT_COLUMNS; y++)
-			{
-				if (_cells[x][y] == nullptr)
-				{
-					std::cout << DEFAULT_IMAGE;
-				}
-				else
-				{
-					std::cout << _cells[x][y]->getImage();
-				}
-			}
-		}
-		/*for (int x = 0; x < DEFAULT_ROWS; x++)
-		{
-			for (int y = 0; y < DEFAULT_COLUMNS; y++)
-			{
-				if (_cells[x][y] != nullptr)
-				{
-					_cells[x][y]->setTurnDoneCheck(true);
-				}
-			}
-		}*/
-
-	}
-
 };
 
 Coordinate Ocean::getEmptyCellCoord()
@@ -103,10 +93,9 @@ Coordinate Ocean::getEmptyCellCoord()
 	int x, y;
 	
 	do{
-	x = random.nextIntBetween(0, DEFAULT_ROWS - 1);
-	y = random.nextIntBetween(0, DEFAULT_COLUMNS - 1);
+	x = random.nextIntBetween(0, _rows - 1);
+	y = random.nextIntBetween(0, _columns - 1);
 	} while (_cells[x][y] != nullptr);
-
 	Coordinate empty(x,y);
 
 	return empty;
@@ -116,10 +105,9 @@ Coordinate Ocean::getEmptyCellCoord()
 void Ocean::createObstacles()
 {
 	Coordinate empty;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < _obstacles; i++)
 	{
 		empty = getEmptyCellCoord();
-		std::cout << "\n" << empty.GetX() << " " << empty.GetY() << " ";
 		_cells[empty.GetX()][empty.GetY()] = new Obstacle(*this, empty);
 	}
 	return;
@@ -128,24 +116,26 @@ void Ocean::createObstacles()
 void Ocean::createPrey()
 {
 	Coordinate empty;
-	//std::cout << "tut";
-	empty = getEmptyCellCoord();
-	//std::cout << "tut2";
-	_cells[empty.GetX()][empty.GetY()] = new Prey(*this, empty);
-	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
+	for (int i = 0; i < _preys; i++)
+	{
+		empty = getEmptyCellCoord();
+		_cells[empty.GetX()][empty.GetY()] = new Prey(*this, empty);
+	}
 }
 
 void Ocean::createPredator()
 {
 	Coordinate empty;
-	empty = getEmptyCellCoord();
-	_cells[empty.GetX()][empty.GetY()] = new Predator(*this, empty);
-	//std::cout <<"Cell::"<< _cells[empty.GetX()][empty.GetY()];
+	for (int i = 0; i < _predators; i++)
+	{
+		empty = getEmptyCellCoord();
+		_cells[empty.GetX()][empty.GetY()] = new Predator(*this, empty);
+	}
+
 }
 void Ocean::destroyCell(Coordinate empty)
 {
-	
-	//std::cout << "\n" << empty.GetX() << " " << empty.GetY() << " ";
+
 	delete _cells[empty.GetX()][empty.GetY()];
 	_cells[empty.GetX()][empty.GetY()] = nullptr;
 }

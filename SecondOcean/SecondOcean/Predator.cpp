@@ -15,6 +15,7 @@ void Predator::MoveFrom(Coordinate from, Coordinate to)
 
 void Predator::Reproduce(Coordinate anOffset)
 {	
+	_owner.setPredators(_owner.getPredators() + 1);
 	assignCellAt(anOffset, new Predator(_owner, anOffset));
 
 
@@ -35,6 +36,7 @@ void Predator::process()
 		}
 		else
 		{
+			_owner.setPredators(_owner.getPredators() - 1);
 			assignCellAt(getOffset(), nullptr);
 			_owner.destroyCell(getOffset());
 			return;
@@ -62,6 +64,7 @@ void Predator::process()
 
 void Predator::eatPrey(Coordinate from, Coordinate to)
 {
+	_owner.setPreys(_owner.getPreys() - 1);
 	_owner.destroyCell(to);
 	assignCellAt(from, nullptr);
 
